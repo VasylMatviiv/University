@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import entity.Department;
 import entity.Lector;

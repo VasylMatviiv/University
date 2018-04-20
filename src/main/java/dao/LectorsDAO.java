@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import entity.Department;
 import entity.Lector;

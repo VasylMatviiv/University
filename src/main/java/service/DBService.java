@@ -1,7 +1,7 @@
 package service;
 
-import DAO.DepartmentDAO;
-import DAO.LectorsDAO;
+import dao.DepartmentDAO;
+import dao.LectorsDAO;
 import entity.Department;
 import entity.Lector;
 import org.hibernate.HibernateException;

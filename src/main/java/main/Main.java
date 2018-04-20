@@ -1,7 +1,5 @@
-package Main;
+package main;
 
-import entity.Lector;
-import service.DBException;
 import service.DBService;
 
 import java.io.IOException;
