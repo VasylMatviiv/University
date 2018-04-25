@@ -6,6 +6,7 @@ import service.DBException;
 import service.DBService;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,113 +34,115 @@ public class UI {
     public boolean function() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        switch (scanner.nextInt()) {
+        try {
+            switch (scanner.nextInt()) {
 
-            case 1: {
+                case 1: {
 
-                showLectors();
-                System.out.println("\n" +
-                        "Press Enter to continue");
-
-                scanner.next();
-                scanner.nextLine();
-                return true;
-            }
-            case 2: {
-
-                showDepartmets();
-                System.out.println("\n" +
-                        "Press Enter to continue");
-                scanner.next();
-                scanner.nextLine();
-                return true;
-            }
-
-            case 3: {
-
-                System.out.print("Who is head of department ");
-                scanner = new Scanner(System.in);
-                String name = scanner.nextLine();
-                if (name.trim() == "") {
-                    System.out.println("\n" +
-                            "Not correct input");
+                    showLectors();
+                    System.out.println("\n" + "Press Enter to continue");
+                    scanner.next();
+                    scanner.nextLine();
                     return true;
                 }
-                findHeadOfDepartments(name);
-                System.out.println("\n" +
-                        "Press Enter to continue");
+                case 2: {
 
-                scanner.next();
-                scanner.nextLine();
-                return true;
-            }
-            case 4: {
+                    showDepartmets();
+                    System.out.println("\n" +
+                            "Press Enter to continue");
+                    scanner.next();
+                    scanner.nextLine();
+                    return true;
+                }
 
-                System.out.println("Show {department_name} statistic. ");
-                System.out.print("department name: ");
-                scanner = new Scanner(System.in);
-                String name = scanner.nextLine();
-                if (name.trim() == "") {
-                    System.out.println("\n" +
-                            "Not correct input");
-                } else showStatistic(name);
-                System.out.println("\n" +
-                        "Press Enter to continue");
-                scanner.nextLine();
-                return true;
-            }
-            case 5: {
-                System.out.flush();
-                System.out.print("Show the average salary for department ");
-                scanner = new Scanner(System.in);
-                String name = scanner.nextLine();
-                if (name.trim() == "") {
-                    System.out.println("\n" +
-                            "Not correct input");
-                } else showAVG(name);
-                System.out.println("\n" +
-                        "Press Enter to continue");
-                scanner.next();
-                scanner.nextLine();
-                return true;
-            }
-            case 6: {
-                System.out.print("Show count of employee for department  ");
-                scanner = new Scanner(System.in);
-                String name = scanner.nextLine();
-                if (name.trim() == "") {
-                    System.out.println("\n" +
-                            "Not correct input");
-                } else getCountEmployee(name);
-                System.out.println("\n" +
-                        "Press Enter to continue");
-                scanner.next();
-                scanner.nextLine();
-                return true;
-            }
-            case 7: {
+                case 3: {
 
-                System.out.print("Global search in table Lectors : ");
-                scanner = new Scanner(System.in);
-                String text = scanner.nextLine();
-                if (text.trim() == "") {
+                    System.out.print("Who is head of department ");
+                    scanner = new Scanner(System.in);
+                    String name = scanner.nextLine();
+                    if (name.trim() == "") {
+                        System.out.println("\n" +
+                                "Not correct input!");
+                        return true;
+                    }
+                    findHeadOfDepartments(name);
                     System.out.println("\n" +
-                            "Not correct input");
-                } else globalSearch(text);
-                System.out.println("\n" +
-                        "Press Enter to continue");
-                scanner.next();
-                scanner.nextLine();
-                return true;
+                            "Press Enter to continue");
+                    scanner.next();
+                    scanner.nextLine();
+                    return true;
+                }
+                case 4: {
+
+                    System.out.println("Show {department_name} statistic. ");
+                    System.out.print("department name: ");
+                    scanner = new Scanner(System.in);
+                    String name = scanner.nextLine();
+                    if (name.trim() == "") {
+                        System.out.println("\n" +
+                                "Not correct input!");
+                    } else showStatistic(name);
+                    System.out.println("\n" +
+                            "Press Enter to continue");
+                    scanner.nextLine();
+                    return true;
+                }
+                case 5: {
+                    System.out.flush();
+                    System.out.print("Show the average salary for department ");
+                    scanner = new Scanner(System.in);
+                    String name = scanner.nextLine();
+                    if (name.trim() == "") {
+                        System.out.println("\n" +
+                                "Not correct input!");
+                    } else showAVG(name);
+                    System.out.println("\n" +
+                            "Press Enter to continue");
+                    scanner.next();
+                    scanner.nextLine();
+                    return true;
+                }
+                case 6: {
+                    System.out.print("Show count of employee for department  ");
+                    scanner = new Scanner(System.in);
+                    String name = scanner.nextLine();
+                    if (name.trim() == "") {
+                        System.out.println("\n" +
+                                "Not correct input!");
+                    } else getCountEmployee(name);
+                    System.out.println("\n" +
+                            "Press Enter to continue");
+                    scanner.next();
+                    scanner.nextLine();
+                    return true;
+                }
+                case 7: {
+
+                    System.out.print("Global search in table Lectors : ");
+                    scanner = new Scanner(System.in);
+                    String text = scanner.nextLine();
+                    if (text.trim() == "") {
+                        System.out.println("\n" +
+                                "Not correct input!");
+                    } else globalSearch(text);
+                    System.out.println("\n" +
+                            "Press Enter to continue");
+                    scanner.next();
+                    scanner.nextLine();
+                    return true;
+                }
+                case 0: {
+                    System.out.println("Bye!");
+                    return false;
+                }
+                default: {
+                    System.out.println("Not correct input!");
+                    return true;
+                }
             }
-            case 0: {
-                System.out.println("Bye!");
-                return false;
-            }
-            default: {
-                System.out.println("Not correct input");
-                return true;
-            }
+        } catch (InputMismatchException e) {
+            System.out.println("Not correct inputQ");
+            return true;
         }
     }
 
@@ -147,6 +150,9 @@ public class UI {
         StringBuilder str = new StringBuilder("");
         try {
             List<Lector> list = dbService.globalSerch(text);
+            if (list.isEmpty()) {
+                System.out.println("\n" + "Nothing found according to templateQ");
+            }
             int i = 0;
             for (Lector lector : list) {
                 str.append(lector.getFirstName() + " ");
@@ -165,7 +171,9 @@ public class UI {
         try {
             System.out.println(dbService.countLectorsInDepartments(name));
         } catch (DBException e) {
-            e.printStackTrace();
+            System.out.println("Don't find a department " + name + "!");
+        } catch (NullPointerException e) {
+            System.out.println("Don't find department " + name + "!");
         }
     }
 
@@ -174,7 +182,9 @@ public class UI {
         try {
             System.out.println("The average salary of " + name + "is " + dbService.getAVGSalaryInDepartements(name));
         } catch (DBException e) {
-            e.printStackTrace();
+            System.out.println("Don't find a department " + name + "!");
+        } catch (NullPointerException e) {
+            System.out.println("Don't find department " + name + "!");
         }
 
     }
@@ -191,7 +201,9 @@ public class UI {
             }
             System.out.println(text.toString());
         } catch (DBException e) {
-            e.printStackTrace();
+            System.out.println("Don't find a department " + name + "!");
+        } catch (NullPointerException e) {
+            System.out.println("Don't find department  " + name + "!");
         }
 
     }
@@ -200,11 +212,13 @@ public class UI {
         try {
             Lector lector = dbService.getHeadOfDepartment(name);
             if (lector == null) {
-                System.out.println("Don't find head of department or department");
+                System.out.println("Don't find head of department or department" + name);
             }
             System.out.println("Head of " + name + " department is" + lector.getFirstName() + " " + lector.getLastName());
         } catch (DBException e) {
-            e.printStackTrace();
+            System.out.println("Don't find a department " + name + "!");
+        } catch (NullPointerException e) {
+            System.out.println("Don't find head of department or department " + name + "!");
         }
     }
 

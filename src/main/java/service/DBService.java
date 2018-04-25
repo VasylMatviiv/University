@@ -42,6 +42,7 @@ public class DBService {
             LectorsDAO dao = new LectorsDAO(session);
             dao.insert(firstName, lastName, degree, salary);
         } catch (HibernateException e) {
+
             throw new DBException(e);
         } finally {
             session.close();
@@ -93,19 +94,11 @@ public class DBService {
         }
     }
 
-//    public Lector getHeadOfDepartment(String name) throws DBException {
-//        Session session = null;
-//        try {
-//            session = sessionFactory.openSession();
-//            DepartmentDAO dao=new DepartmentDAO(session);
-//            return dao.getDepartmentHead(name);
-//        } catch (HibernateException e) {
-//            throw new DBException(e);
-//        } finally {
-//            session.close();}
-//    }
+
 public Lector getHeadOfDepartment(String name) throws DBException {
-        return getDepartment(name).getHead();
+        Lector lector=getDepartment(name).getHead();
+        if(lector==null)return null;
+        return lector;
 }
 
     public void setHeadOfDepartment(String name, String firstName, String lastNAme) throws DBException {
