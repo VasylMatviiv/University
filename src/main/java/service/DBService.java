@@ -76,24 +76,6 @@ public class DBService {
         }
     }
 
-    public Set<Lector> getLectorsFromDepartments(String name) throws DBException {
-        return getDepartment(name).getLectors();
-    }
-
-    public void setLectorsToDepartments(String name, String firstName, String lastName) throws DBException {
-        Session session = sessionFactory.openSession();
-        Lector lector = getLector(firstName, lastName);
-        if (lector == null) return;
-        try {
-            DepartmentDAO dao = new DepartmentDAO(session);
-            dao.setLectorToDepartment(name, lector);
-        } catch (HibernateException e) {
-            throw new DBException(e);
-        } finally {
-            session.close();
-        }
-    }
-
 
 public Lector getHeadOfDepartment(String name) throws DBException {
         Lector lector=getDepartment(name).getHead();
@@ -101,23 +83,6 @@ public Lector getHeadOfDepartment(String name) throws DBException {
         return lector;
 }
 
-    public void setHeadOfDepartment(String name, String firstName, String lastNAme) throws DBException {
-        Session session = null;
-        Transaction tx = null;
-        try {
-            session = sessionFactory.openSession();
-            tx = session.beginTransaction();
-            Lector lector = getLector(firstName, lastNAme);
-            DepartmentDAO dao = new DepartmentDAO(session);
-            dao.setHead(name, lector);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            throw new DBException(e);
-        } finally {
-            session.close();
-        }
-    }
 
     public List<Department> getAllDepatments() throws DBException {
         Session session = null;
